@@ -1,225 +1,68 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Generate Favicon from Logo</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background: #f0f0f0;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        button {
-            background: #ff6b35;
-            color: white;
-            border: none;
-            padding: 15px 30px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin: 10px 5px;
-        }
-        button:hover {
-            background: #ff5520;
-        }
-        canvas {
-            border: 2px solid #ddd;
-            margin: 10px;
-            display: none;
-        }
-        .preview {
-            margin: 20px 0;
-            padding: 20px;
-            background: #f9f9f9;
-            border-radius: 5px;
-        }
-        .preview img {
-            border: 1px solid #ddd;
-            margin: 5px;
-        }
-        .success {
-            color: green;
-            font-weight: bold;
-            margin: 10px 0;
-        }
-        .instructions {
-            background: #fff3cd;
-            border: 1px solid #ffc107;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 20px 0;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Generate Favicon — GSBrand Works</title>
+  <style>
+    body { font-family: sans-serif; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 100vh; background: #070619; color: white; gap: 20px; }
+    canvas { border: 1px solid #333; border-radius: 12px; }
+    button { padding: 10px 24px; background: linear-gradient(135deg, #6366f1, #a855f7); color: white; border: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; }
+    button:hover { opacity: 0.9; }
+    .row { display: flex; gap: 20px; align-items: center; }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🎨 Favicon Generator</h1>
-        <p>Generate circular favicon files from logo.png</p>
-        
-        <div class="instructions">
-            <strong>Instructions:</strong>
-            <ol>
-                <li>Click "Generate Favicons" button</li>
-                <li>Download all generated files (16x16, 32x32, ICO)</li>
-                <li>Replace the files in the public folder</li>
-                <li>Refresh your browser with Ctrl+Shift+R (or Cmd+Shift+R on Mac)</li>
-            </ol>
-        </div>
-
-        <button onclick="generateFavicons()">Generate Favicons</button>
-        
-        <div id="preview" class="preview" style="display:none;">
-            <h3>Preview:</h3>
-            <div id="previewImages"></div>
-        </div>
-        
-        <div id="status"></div>
-
-        <canvas id="canvas16" width="16" height="16"></canvas>
-        <canvas id="canvas32" width="32" height="32"></canvas>
-        <canvas id="canvas" width="256" height="256"></canvas>
+  <h1>GSBrand Works — Favicon Generator</h1>
+  <div class="row">
+    <div>
+      <h3>favicon.png (180×180)</h3>
+      <canvas id="c180" width="180" height="180"></canvas>
     </div>
+    <div>
+      <h3>favicon.ico (32×32)</h3>
+      <canvas id="c32" width="32" height="32"></canvas>
+    </div>
+  </div>
+  <div class="row">
+    <button onclick="download('c180','favicon.png')">Download PNG</button>
+    <button onclick="download('c32','favicon.ico')">Download ICO (as PNG)</button>
+  </div>
+  <p style="color:#666;font-size:12px;">Right-click canvas → "Save Image As" for manual download. For .ico, use an online PNG-to-ICO converter.</p>
 
-    <script>
-        function generateFavicons() {
-            const img = new Image();
-            img.crossOrigin = 'anonymous';
-            
-            img.onload = function() {
-                // Generate 16x16
-                generate16x16(img);
-                
-                // Generate 32x32
-                generate32x32(img);
-                
-                // Generate ICO (using 32x32)
-                generateICO(img);
-                
-                document.getElementById('preview').style.display = 'block';
-                document.getElementById('status').innerHTML = '<p class="success">✅ Favicons generated successfully! Click the download buttons above to save them.</p>';
-            };
-            
-            img.onerror = function() {
-                document.getElementById('status').innerHTML = '<p style="color:red;">❌ Error loading logo.png. Make sure the file exists in public/image/logo.png</p>';
-            };
-            
-            img.src = '/image/logo.png';
-        }
+  <script>
+    function drawFavicon(canvasId) {
+      const c = document.getElementById(canvasId);
+      const ctx = c.getContext('2d');
+      const s = c.width;
+      const r = s / 2;
 
-        function drawCircularImage(canvas, img) {
-            const ctx = canvas.getContext('2d');
-            const size = canvas.width;
-            
-            // Clear canvas
-            ctx.clearRect(0, 0, size, size);
-            
-            // Create circular clipping path
-            ctx.save();
-            ctx.beginPath();
-            ctx.arc(size/2, size/2, size/2, 0, Math.PI * 2);
-            ctx.closePath();
-            ctx.clip();
-            
-            // Draw image
-            ctx.drawImage(img, 0, 0, size, size);
-            ctx.restore();
-        }
+      const grad = ctx.createLinearGradient(0, 0, s, s);
+      grad.addColorStop(0, '#6366f1');
+      grad.addColorStop(0.5, '#a855f7');
+      grad.addColorStop(1, '#22d3ee');
 
-        function generate16x16(img) {
-            const canvas = document.getElementById('canvas16');
-            drawCircularImage(canvas, img);
-            
-            canvas.toBlob(function(blob) {
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.download = 'favicon-16x16.png';
-                link.href = url;
-                link.textContent = 'Download 16x16';
-                link.style.margin = '10px';
-                link.style.display = 'inline-block';
-                link.style.padding = '10px 20px';
-                link.style.background = '#28a745';
-                link.style.color = 'white';
-                link.style.textDecoration = 'none';
-                link.style.borderRadius = '5px';
-                
-                const preview = document.createElement('img');
-                preview.src = url;
-                preview.width = 16;
-                preview.height = 16;
-                preview.style.imageRendering = 'pixelated';
-                
-                document.getElementById('previewImages').appendChild(preview);
-                document.getElementById('previewImages').appendChild(link);
-                document.getElementById('previewImages').appendChild(document.createElement('br'));
-            });
-        }
+      ctx.beginPath();
+      ctx.arc(r, r, r, 0, Math.PI * 2);
+      ctx.fillStyle = grad;
+      ctx.fill();
 
-        function generate32x32(img) {
-            const canvas = document.getElementById('canvas32');
-            drawCircularImage(canvas, img);
-            
-            canvas.toBlob(function(blob) {
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.download = 'favicon-32x32.png';
-                link.href = url;
-                link.textContent = 'Download 32x32';
-                link.style.margin = '10px';
-                link.style.display = 'inline-block';
-                link.style.padding = '10px 20px';
-                link.style.background = '#28a745';
-                link.style.color = 'white';
-                link.style.textDecoration = 'none';
-                link.style.borderRadius = '5px';
-                
-                const preview = document.createElement('img');
-                preview.src = url;
-                preview.width = 32;
-                preview.height = 32;
-                
-                document.getElementById('previewImages').appendChild(preview);
-                document.getElementById('previewImages').appendChild(link);
-                document.getElementById('previewImages').appendChild(document.createElement('br'));
-            });
-        }
+      ctx.fillStyle = '#ffffff';
+      ctx.font = `800 ${s * 0.45}px Montserrat, sans-serif`;
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText('G', r, r + s * 0.02);
+    }
 
-        function generateICO(img) {
-            const canvas = document.getElementById('canvas32');
-            drawCircularImage(canvas, img);
-            
-            canvas.toBlob(function(blob) {
-                const url = URL.createObjectURL(blob);
-                const link = document.createElement('a');
-                link.download = 'favicon.ico';
-                link.href = url;
-                link.textContent = 'Download favicon.ico';
-                link.style.margin = '10px';
-                link.style.display = 'inline-block';
-                link.style.padding = '10px 20px';
-                link.style.background = '#28a745';
-                link.style.color = 'white';
-                link.style.textDecoration = 'none';
-                link.style.borderRadius = '5px';
-                
-                document.getElementById('previewImages').appendChild(link);
-                document.getElementById('previewImages').appendChild(document.createElement('br'));
-                
-                const note = document.createElement('p');
-                note.innerHTML = '<strong>Note:</strong> The .ico file is actually a PNG. For proper ICO format, use an online converter or the files should work fine as PNG.';
-                note.style.fontSize = '12px';
-                note.style.color = '#666';
-                document.getElementById('previewImages').appendChild(note);
-            });
-        }
-    </script>
+    drawFavicon('c180');
+    drawFavicon('c32');
+
+    function download(canvasId, filename) {
+      const c = document.getElementById(canvasId);
+      const link = document.createElement('a');
+      link.download = filename;
+      link.href = c.toDataURL('image/png');
+      link.click();
+    }
+  </script>
 </body>
 </html>
-
