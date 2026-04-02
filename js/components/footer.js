@@ -36,11 +36,7 @@ export function renderFooter() {
           <div class="flex flex-col md:flex-row items-center justify-between gap-6 pb-10 border-b border-white/10">
             <a href="/" class="flex items-center gap-3 group">
               <img src="/public/gsbrand_logo.jpg" alt="GSBrand Works" class="h-11 w-auto rounded-lg object-contain shadow-lg" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-              <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-500 to-purple-600 items-center justify-center text-white font-bold text-xl shadow-lg border-2 border-white/20 hidden">G</div>
-              <div>
-                <h4 class="text-xl font-bold font-montserrat text-white">GSBrand Works</h4>
-                <p class="text-[10px] text-brand-400 tracking-widest">Grow Startup Brand Works</p>
-              </div>
+ 
             </a>
             <div class="flex gap-3">
               ${[

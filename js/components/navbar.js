@@ -140,14 +140,6 @@ export function renderNavbar() {
           <a href="/" class="flex items-center group flex-shrink-0 gap-3" aria-label="GSBrand Works Home">
             <img src="/public/gsbrand_logo.jpg" alt="GSBrand Works" class="h-9 md:h-11 w-auto rounded-lg object-contain shadow-lg group-hover:scale-105 transition-transform duration-300" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
             <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-brand-500 to-purple-600 items-center justify-center text-white font-bold text-xl shadow-lg border-2 border-white/20 group-hover:scale-105 transition-transform duration-300 hidden">G</div>
-            <div class="text-left">
-              <h1 class="text-sm md:text-base font-bold text-white group-hover:text-brand-300 transition-colors duration-300 leading-tight font-montserrat">
-                GSBrand Works
-              </h1>
-              <p class="text-[9px] md:text-[11px] text-brand-400 font-medium tracking-wider leading-tight">
-                Grow Startup Brand Works
-              </p>
-            </div>
           </a>
 
           <!-- Desktop Nav -->
