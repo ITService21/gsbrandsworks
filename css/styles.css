@@ -190,20 +190,41 @@ h1, h2, h3, h4, h5, h6 { font-family: 'Montserrat', 'Outfit', sans-serif; }
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
+  perspective: 1200px;
 }
 .hero-slide {
   opacity: 0;
-  transition: opacity 0.8s ease-out;
+  transform: scale(1.08) translateZ(-40px);
+  filter: blur(6px) brightness(0.7);
+  transition: opacity 1s cubic-bezier(0.16,1,0.3,1), transform 1.2s cubic-bezier(0.16,1,0.3,1), filter 0.8s ease-out;
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   z-index: 2;
-  will-change: opacity;
+  will-change: opacity, transform, filter;
 }
 .hero-slide.active {
   opacity: 1;
+  transform: scale(1) translateZ(0);
+  filter: blur(0px) brightness(1);
   z-index: 3;
+}
+.hero-slide.active::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, rgba(99,102,241,0.08) 0%, transparent 70%);
+  animation: heroGlow 3s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 0;
+}
+@keyframes heroGlow {
+  0% { opacity: 0.3; transform: scale(1); }
+  100% { opacity: 0.7; transform: scale(1.1); }
+}
+.hero-heading {
+  clip-path: inset(0 50% 0 50%);
 }
 
 /* ===== Hero Video Background ===== */

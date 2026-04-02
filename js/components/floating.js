@@ -21,7 +21,7 @@ export function renderFloating() {
     <!-- Book Consultant -->
     <button onclick="window.gsb?.openModal()"
        class="fixed bottom-4 sm:bottom-6 right-4 sm:right-6 z-50 inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 btn-gradient text-white font-bold text-xs sm:text-sm rounded-full shadow-2xl hover:scale-105 active:scale-95 transition-transform duration-300 glow-pulse-brand">
-      <i class="fas fa-phone-alt"></i>
+      <i class="fas fa-phone-volume"></i>
       <span class="hidden sm:inline">Book Consultant</span>
       <span class="sm:hidden">Book Now</span>
     </button>
@@ -30,7 +30,7 @@ export function renderFloating() {
     <button id="scroll-top-btn"
        class="fixed bottom-[4.5rem] sm:bottom-24 right-4 sm:right-6 z-50 w-10 h-10 sm:w-11 sm:h-11 rounded-full glass text-white/60 hover:text-white hover:bg-brand-600 transition-all duration-300 items-center justify-center shadow-lg"
        aria-label="Scroll to top" style="display:none;">
-      <i class="fas fa-chevron-up text-xs sm:text-sm"></i>
+      <i class="fas fa-angle-up text-xs sm:text-sm"></i>
     </button>
   `;
 

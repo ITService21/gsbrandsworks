@@ -26,7 +26,7 @@ export function renderModal() {
 
         <div class="text-center mb-5">
           <div class="w-14 h-14 mx-auto mb-3 rounded-2xl bg-gradient-to-br from-brand-500 to-purple-600 flex items-center justify-center shadow-lg">
-            <i class="fas fa-headset text-white text-xl"></i>
+            <i class="fas fa-comments text-white text-xl"></i>
           </div>
           <h2 class="text-2xl font-bold text-white font-montserrat">Book a Consultant</h2>
           <p class="text-xs text-gray-400 mt-1">Fill the form or call us directly for instant support.</p>
@@ -34,7 +34,7 @@ export function renderModal() {
 
         <div class="flex items-center justify-center mb-5">
           <a href="tel:+917383930301" class="flex items-center gap-2 px-5 py-2.5 btn-gradient text-white rounded-full font-semibold text-sm shadow hover:scale-105 transition-transform">
-            <i class="fas fa-phone-alt"></i> Call Now: +91 7383930301
+            <i class="fas fa-phone-volume"></i> Call Now: +91 7383930301
           </a>
         </div>
 
