@@ -106,7 +106,7 @@ export function renderFooter() {
               <ul class="space-y-3">
                 <li class="flex items-start gap-3">
                   <i class="fas fa-location-dot text-brand-400 mt-1 w-4 text-center text-xs"></i>
-                  <span class="text-gray-400 text-sm leading-relaxed">B1/606, The Landmark, Kudasan, Gandhinagar, Gujarat – 382419</span>
+                  <span class="text-gray-400 text-sm leading-relaxed">B2/213, The Landmark, Kudasan, Gandhinagar, Gujarat – 382419</span>
                 </li>
                 <li class="flex items-center gap-3">
                   <i class="fas fa-phone-volume text-brand-400 w-4 text-center text-xs"></i>
